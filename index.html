@@ -75,8 +75,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-info" id="showAnswerButton" onclick="showAnswer()">Show Answer</button>
-                    <button type="button" class="btn btn-success" id="nextFlashcardButton" onclick="nextFlashcard()">Next</button>
-                    <button type="button" class="btn btn-danger" id="prevFlashcardButton" onclick="prevFlashcard()">Previous</button>
+                    <button type="button" class="btn btn-success" id="nextFlashcardButton">Correct</button>
+                    <button type="button" class="btn btn-danger" id="prevFlashcardButton">Wrong</button>
                 </div>
             </div>
         </div>
@@ -92,6 +92,7 @@
         let testFlashcards = [];
         let currentTestIndex = 0;
         let score = 0;
+        let isTesting = false;
 
         // Function to add a flashcard to the array
         const addFlashcard = () => {
@@ -139,10 +140,12 @@
             }
 
             // Duplicate and shuffle flashcards for the test
-            testFlashcards = [...flashcards].sort(() => Math.random() - 0.5);
+            testFlashcards = flashcards.slice().sort(() => Math.random() - 0.5);
             currentTestIndex = 0;
             score = 0;
+            isTesting = true;
 
+            showFinalScore(false);
             document.getElementById('scoreDisplay').style.display = 'block';
             document.getElementById('totalFlashcards').textContent = testFlashcards.length;
 
@@ -150,26 +153,14 @@
         }
 
         // Function to display the next flashcard in test mode
-        const nextFlashcard = () => {
-            if (testFlashcards.length === 0) {
-                alert('No more flashcards to display.');
-                return;
-            }
-
-            // Show next flashcard
-            currentTestIndex++;
-            if (currentTestIndex >= testFlashcards.length) {
+        const nextFlashcard = (points) => {
+            score += points;
+            if (testFlashcards.length === 0 || !isTesting) {
+                $("#flashcardModal").modal('hide');
                 showFinalScore();
-            } else {
-                displayTestFlashcard();
             }
-        }
-
-        // Function to display the previous flashcard in test mode
-        const prevFlashcard = () => {
-            if (currentTestIndex > 0) {
-                currentTestIndex--;
-                displayTestFlashcard();
+            else {
+                displayTestFlashcard()
             }
         }
 
@@ -186,6 +177,8 @@
 
             // Show the modal
             $('#flashcardModal').modal('show');
+            testFlashcards.splice(currentTestIndex, 1);
+            currentTestIndex = Math.floor(Math.random() * testFlashcards.length);
         }
 
         // Function to show the answer in the modal
@@ -195,21 +188,22 @@
         }
 
         // Function to handle the score and completion of the test
-        const showFinalScore = () => {
-            alert(`Test completed! Your score is ${score} out of ${testFlashcards.length}`);
+        const showFinalScore = (finished = true) => {
+            if (finished){
+                alert(`Test completed! Your score is ${score}/${flashcards.length} - ${Math.floor((score/flashcards.length) * 100)}%`);
+            }
             document.getElementById('score').textContent = score;
             document.getElementById('scoreDisplay').style.display = 'none';
         }
 
         // Handle "plus" button click to increase score
         document.getElementById('nextFlashcardButton').addEventListener('click', () => {
-            score++;
-            nextFlashcard();
+            nextFlashcard(1);
         });
 
         // Handle "minus" button click to decrease score
         document.getElementById('prevFlashcardButton').addEventListener('click', () => {
-            nextFlashcard();
+            nextFlashcard(0);
         });
 
         // Function to confirm and delete all flashcards
@@ -221,8 +215,8 @@
 
         // Function to delete all flashcards
         const deleteAllFlashcards = () => {
-            flashcards.length = 0; // Clear the flashcards array
-            testFlashcards.length = 0; // Clear the test flashcards array
+            flashcards = []; // Clear the flashcards array
+            testFlashcards = []; // Clear the test flashcards array
             document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
             alert('All flashcards have been deleted.');
         }
