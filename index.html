@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ean's Flashcard App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+        }
+        #flashcardAnswer {
+            font-weight: bold;
+        }
+        .test-me-button {
+            font-size: 1.25rem;
+            padding: 15px 30px;
+            background-color: red; /* Set background color to red */
+            border-color: red; /* Set border color to red */
+            color: white; /* Set text color to white for better visibility */
+        }
+        .test-me-container {
+            text-align: center;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ml-2 {
+            margin-left: 10px; /* Add some space between the buttons */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Ean's Flashcard App</h1>
+        <form id="flashcardForm" class="form-inline justify-content-center">
+            <div class="form-group mb-2">
+                <input type="text" id="questionInput" class="form-control mr-sm-2" placeholder="Enter the question here">
+                <input type="text" id="answerInput" class="form-control mr-sm-2" placeholder="Enter the answer here">
+            </div>
+            <button type="button" class="btn btn-primary mb-2" onclick="addFlashcard()">Add Flashcard</button>
+            <button type="button" class="btn btn-success mb-2 ml-2" onclick="displayRandomFlashcard()">Show Random</button>
+        </form>
+        <div class="test-me-container mt-4">
+            <button class="btn test-me-button" onclick="startTest()">Test Me</button>
+        </div>
+        <div class="text-center mt-3">
+            <button class="btn btn-danger" onclick="confirmDeleteAllFlashcards()">Delete All Cards</button>
+        </div>
+        <div id="scoreDisplay" class="text-center mt-3" style="display: none;">
+            <h4>Score: <span id="score">0</span> / <span id="totalFlashcards">0</span></h4>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="flashcardModal" tabindex="-1" role="dialog" aria-labelledby="flashcardModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="flashcardModalLabel">Flashcard</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <div id="flashcardQuestion"></div>
+                    <div id="flashcardAnswer" class="mt-2" style="display: none;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" id="showAnswerButton" onclick="showAnswer()">Show Answer</button>
+                    <button type="button" class="btn btn-success" id="nextFlashcardButton" onclick="nextFlashcard()">Next</button>
+                    <button type="button" class="btn btn-danger" id="prevFlashcardButton" onclick="prevFlashcard()">Previous</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Array to store flashcards
+        const flashcards = [];
+        let testFlashcards = [];
+        let currentTestIndex = 0;
+        let score = 0;
+
+        // Function to add a flashcard to the array
+        const addFlashcard = () => {
+            const questionElement = document.getElementById('questionInput');
+            const answerElement = document.getElementById('answerInput');
+            const question = questionElement.value.trim();
+            const answer = answerElement.value.trim();
+
+            if (question && answer) {
+                flashcards.push({ question, answer });
+                questionElement.value = ''; // Clear input field
+                answerElement.value = ''; // Clear input field
+            } else {
+                alert('Please add both a question and an answer.');
+            }
+        }
+
+        // Function to display a random flashcard
+        const displayRandomFlashcard = () => {
+            if (flashcards.length === 0) {
+                alert('No flashcards to display.');
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * flashcards.length);
+            const randomFlashcard = flashcards[randomIndex];
+
+            const questionElement = document.getElementById('flashcardQuestion');
+            const answerElement = document.getElementById('flashcardAnswer');
+            questionElement.textContent = randomFlashcard.question;
+            answerElement.textContent = randomFlashcard.answer;
+
+            // Hide the answer initially
+            answerElement.style.display = 'none';
+
+            // Show the modal
+            $('#flashcardModal').modal('show');
+        }
+
+        // Function to start the test mode
+        const startTest = () => {
+            if (flashcards.length === 0) {
+                alert('No flashcards available to test.');
+                return;
+            }
+
+            // Duplicate and shuffle flashcards for the test
+            testFlashcards = [...flashcards].sort(() => Math.random() - 0.5);
+            currentTestIndex = 0;
+            score = 0;
+
+            document.getElementById('scoreDisplay').style.display = 'block';
+            document.getElementById('totalFlashcards').textContent = testFlashcards.length;
+
+            displayTestFlashcard();
+        }
+
+        // Function to display the next flashcard in test mode
+        const nextFlashcard = () => {
+            if (testFlashcards.length === 0) {
+                alert('No more flashcards to display.');
+                return;
+            }
+
+            // Show next flashcard
+            currentTestIndex++;
+            if (currentTestIndex >= testFlashcards.length) {
+                showFinalScore();
+            } else {
+                displayTestFlashcard();
+            }
+        }
+
+        // Function to display the previous flashcard in test mode
+        const prevFlashcard = () => {
+            if (currentTestIndex > 0) {
+                currentTestIndex--;
+                displayTestFlashcard();
+            }
+        }
+
+        // Function to display a flashcard in test mode
+        const displayTestFlashcard = () => {
+            if (testFlashcards.length === 0) return;
+
+            const flashcard = testFlashcards[currentTestIndex];
+            const questionElement = document.getElementById('flashcardQuestion');
+            const answerElement = document.getElementById('flashcardAnswer');
+            questionElement.textContent = flashcard.question;
+            answerElement.textContent = flashcard.answer;
+            answerElement.style.display = 'none';
+
+            // Show the modal
+            $('#flashcardModal').modal('show');
+        }
+
+        // Function to show the answer in the modal
+        const showAnswer = () => {
+            const answerElement = document.getElementById('flashcardAnswer');
+            answerElement.style.display = 'block';
+        }
+
+        // Function to handle the score and completion of the test
+        const showFinalScore = () => {
+            alert(`Test completed! Your score is ${score} out of ${testFlashcards.length}`);
+            document.getElementById('score').textContent = score;
+            document.getElementById('scoreDisplay').style.display = 'none';
+        }
+
+        // Handle "plus" button click to increase score
+        document.getElementById('nextFlashcardButton').addEventListener('click', () => {
+            score++;
+            nextFlashcard();
+        });
+
+        // Handle "minus" button click to decrease score
+        document.getElementById('prevFlashcardButton').addEventListener('click', () => {
+            nextFlashcard();
+        });
+
+        // Function to confirm and delete all flashcards
+        const confirmDeleteAllFlashcards = () => {
+            if (confirm('Are you sure you want to delete all flashcards? This action cannot be undone.')) {
+                deleteAllFlashcards();
+            }
+        }
+
+        // Function to delete all flashcards
+        const deleteAllFlashcards = () => {
+            flashcards.length = 0; // Clear the flashcards array
+            testFlashcards.length = 0; // Clear the test flashcards array
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            alert('All flashcards have been deleted.');
+        }
+    </script>
+</body>
+</html>
