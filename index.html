@@ -146,8 +146,6 @@
             score = 0;
             isTesting = true;
 
-            showFinalScore(false);
-            document.getElementById('scoreDisplay').style.display = 'block';
             document.getElementById('totalFlashcards').textContent = testFlashcards.length;
 
             displayTestFlashcard();
@@ -158,9 +156,10 @@
             score += points;
             if (testFlashcards.length === 0 || !isTesting) {
                 $("#flashcardModal").modal('hide');
-                showFinalScore();
+                showFinalScore(true);
             }
             else {
+                showFinalScore(false);
                 displayTestFlashcard()
             }
         }
@@ -190,11 +189,15 @@
 
         // Function to handle the score and completion of the test
         const showFinalScore = (finished = true) => {
+            document.getElementById('score').textContent = score;
             if (finished){
                 alert(`Test completed! Your score is ${score}/${flashcards.length} - ${Math.floor((score/flashcards.length) * 100)}%`);
+                document.getElementById('scoreDisplay').style.display = 'none';
             }
-            document.getElementById('score').textContent = score;
-            document.getElementById('scoreDisplay').style.display = 'none';
+            else {
+                document.getElementById('scoreDisplay').style.display = 'block';
+            }
+
         }
 
         // Handle "plus" button click to increase score
