@@ -1,0 +1,52 @@
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+*.tgz
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Dependency directories
+jspm_packages/
+
+# Package lock files (uncomment if you want to ignore package-lock.json or yarn.lock)
+# package-lock.json
+# yarn.lock
+
+# Testing
+coverage/
+*.lcov
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Node.js specific
+pids/
+*.pid
+
+# Yarn
+.yarn/
