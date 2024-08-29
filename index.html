@@ -41,8 +41,8 @@
         <h1 class="text-center">Ean's Flashcard App</h1>
         <form id="flashcardForm" class="form-inline justify-content-center">
             <div class="form-group mb-2">
-                <input type="text" id="questionInput" class="form-control mr-sm-2" placeholder="Enter the question here">
-                <input type="text" id="answerInput" class="form-control mr-sm-2" placeholder="Enter the answer here">
+                <textarea id="questionInput" class="form-control mr-sm-2" placeholder="Enter the question here" rows="3"></textarea>
+                <textarea id="answerInput" class="form-control mr-sm-2" placeholder="Enter the answer here" rows="3"></textarea>                
             </div>
             <button type="button" class="btn btn-primary mb-2" onclick="addFlashcard()">Add Flashcard</button>
             <button type="button" class="btn btn-success mb-2 ml-2" onclick="displayRandomFlashcard()">Show Random</button>
@@ -88,7 +88,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         // Array to store flashcards
-        const flashcards = [];
+        const flashcards = JSON.parse(localStorage.getItem("flash-cards")) || [];
         let testFlashcards = [];
         let currentTestIndex = 0;
         let score = 0;
@@ -103,6 +103,7 @@
 
             if (question && answer) {
                 flashcards.push({ question, answer });
+                localStorage.setItem("flash-cards", JSON.stringify(flashcards));
                 questionElement.value = ''; // Clear input field
                 answerElement.value = ''; // Clear input field
             } else {
