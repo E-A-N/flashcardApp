@@ -50,3 +50,5 @@ pids/
 
 # Yarn
 .yarn/
+
+/personalData
