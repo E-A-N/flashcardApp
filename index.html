@@ -261,7 +261,7 @@
 
             try  {
                 const module = await import(fileUrl);
-                module();
+                module.routine();
                 location.reload();
             }
             catch (err){
