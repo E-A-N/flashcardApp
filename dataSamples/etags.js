@@ -1,4 +1,3 @@
-console.log('etag routine is found bb!!');
 let etagsRoutine = () => {
     let etagQuestions = [
         {question: "What is an ETag and how is it used in HTTP?", answer: "An ETag (Entity Tag) is a unique identifier assigned by a server to a specific version of a resource. It is used in HTTP to determine if the resource has changed. When a client requests a resource, the server responds with an ETag in the headers. For subsequent requests, the client includes the ETag in the `If-None-Match` header, allowing the server to respond with a 304 Not Modified status if the resource has not changed."},
