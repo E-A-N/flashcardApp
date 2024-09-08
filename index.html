@@ -39,7 +39,7 @@
 <body>
     <div class="container">
         <h1 class="text-center">Ean's Flashcard App</h1>
-        <form id="flashcardForm" class="form-inline justify-content-center">
+        <form id="flashcardForm" class="form-inline justify-content-center d-none">
             <div class="form-group mb-2">
                 <textarea id="questionInput" class="form-control mr-sm-2" placeholder="Enter the question here" rows="3"></textarea>
                 <textarea id="answerInput" class="form-control mr-sm-2" placeholder="Enter the answer here" rows="3"></textarea>                
@@ -58,7 +58,8 @@
         </div>
 
         <form>
-        <div class="mb-3">
+        <br><br>
+        <div class="text-center mb-3">
             <label for="cars" class="form-label">Choose a test:</label>
             <select id="topic-select" class="form-select">
                 <option value="etags">E-tags</option>
@@ -70,7 +71,7 @@
                 <option value="httpHeaderTypes">HTTP Header Types</option>
                 <option value="httpStatusCodeTypes">HTTP Status Code Types</option>
                 <option value="nodeJS">Node.js</option>
-                <option value="reactJS">ReactJS</option>
+                <option value="reactJS">React.js</option>
                 <option value="trigFunctions">Trigonometry Functions</option>
                 <option value="typescript">TypeScript</option>
             </select>
@@ -276,12 +277,17 @@
         }
 
         const topicSelectElm = document.getElementById("topic-select");
+        topicSelectElm.options.selectedIndex = localStorage.getItem("saved-index")
+            || topicSelectElm.options.selectedIndex;
         topicSelectElm.onchange = async () => {
             let index = topicSelectElm.options.selectedIndex;
+            localStorage.setItem('saved-index', topicSelectElm.options.selectedIndex);
             let item = topicSelectElm.options.item(index).value;
-            console.log('eandebug full URL is:', item);
+            console.log('eandebug full URL is:', topicSelectElm.options.selectedIndex, item);
             globalRoutines[item]();
         }
+        // const cardInputs = document.getElementById("flashcardForm");
+        // cardInputs.display = "none";
     </script>
 </body>
 </html>
