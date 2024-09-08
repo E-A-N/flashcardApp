@@ -56,7 +56,20 @@
         <div id="scoreDisplay" class="text-center mt-3" style="display: none;">
             <h4>Score: <span id="score">0</span> / <span id="totalFlashcards">0</span></h4>
         </div>
+
+        <form>
+            <div class="mb-3">
+              <label for="cars" class="form-label">Choose a test:</label>
+              <select id="topic-select" class="form-select">
+                <option value="etags.js">E-tags</option>
+                <option value="gameMath.js">Game Mathmematics</option>
+              </select>
+            </div>
+        </form>
+          
     </div>
+
+
 
     <!-- Modal -->
     <div class="modal fade" id="flashcardModal" tabindex="-1" role="dialog" aria-labelledby="flashcardModalLabel" aria-hidden="true">
@@ -237,6 +250,23 @@
             testFlashcards = []; // Clear the test flashcards array
             document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
             alert('All flashcards have been deleted.');
+        }
+
+        const topicSelectElm = document.getElementById("topic-select");
+        topicSelectElm.onchange = async () => {
+            let index = topicSelectElm.options.selectedIndex;
+            let item = topicSelectElm.options.item(index).value;
+            let fileUrl = `./dataSamples/${item}`;
+            console.log('eandebug full URL is:', fileUrl);
+
+            try  {
+                const module = await import(fileUrl);
+                module();
+                location.reload();
+            }
+            catch (err){
+                console.error(err);
+            }
         }
     </script>
 </body>
