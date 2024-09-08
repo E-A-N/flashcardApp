@@ -1,4 +1,4 @@
-let httpMethodsRoutine = () => {    
+globalRoutines.httpMethods = () => {    
     let httpMethodList = [
         {question: "What is the GET HTTP Method?", answer: "Retrieves data from a specified resource. It should not alter the state of the server or resource."},
         {question: "What is an example of a GET HTTP Method?", answer: "Fetching a webpage."},

@@ -63,14 +63,15 @@
             <select id="topic-select" class="form-select">
                 <option value="etags">E-tags</option>
                 <option value="gameMath">Game Mathmematics</option>
-                <option value="gls">GLSL</option>
+                <option value="glsl">GLSL</option>
                 <option value="httpCodes">HTTP Codes</option>
                 <option value="httpHeaders">HTTP Headers</option>
+                <option value="httpMethods">HTTP Methods</option>
                 <option value="httpHeaderTypes">HTTP Header Types</option>
                 <option value="httpStatusCodeTypes">HTTP Status Code Types</option>
                 <option value="nodeJS">Node.js</option>
                 <option value="reactJS">ReactJS</option>
-                <option value="trigFunctions">Trigonmetry Functions</option>
+                <option value="trigFunctions">Trigonometry Functions</option>
                 <option value="typescript">TypeScript</option>
             </select>
         </div>
@@ -105,6 +106,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        let globalRoutines = {};
+    </script>
     <script src="dataSamples/etags.js"></script>
     <script src="dataSamples/gameMath.js"></script>
     <script src="dataSamples/glsl.js"></script>
@@ -275,18 +279,8 @@
         topicSelectElm.onchange = async () => {
             let index = topicSelectElm.options.selectedIndex;
             let item = topicSelectElm.options.item(index).value;
-            let fileUrl = `./dataSamples/${item}`;
-            console.log('eandebug full URL is:', fileUrl);
-
-            try  {
-                const module = await import(fileUrl);
-                console.log("eandebug module is;", module);
-                module.routine();
-                location.reload();
-            }
-            catch (err){
-                console.error(err);
-            }
+            console.log('eandebug full URL is:', item);
+            globalRoutines[item]();
         }
     </script>
 </body>

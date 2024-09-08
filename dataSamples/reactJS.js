@@ -1,4 +1,4 @@
-let reactJsRoutine = () => {
+globalRoutines.reactJS = () => {
     let reactQuestions = [
         {question: "What is ReactJS, and what are its main features?", answer: "ReactJS is a JavaScript library for building user interfaces, particularly single-page applications where you need a fast, interactive user experience. Its main features include a component-based architecture, virtual DOM for efficient updates, and declarative syntax for describing UI."},
 
@@ -83,6 +83,6 @@ let reactJsRoutine = () => {
         {question: "What is the role of `React.StrictMode` during development?", answer: "`React.StrictMode` is a development tool that helps identify potential problems in an application by activating additional checks and warnings. It does not impact production builds but can help highlight issues like unsafe lifecycle methods, legacy API usage, and potential side effects."}
     ];
 
-    localStorage.setItem("flash-cards", JSON.stringify(reactQuestions));
-    location.reload();
+localStorage.setItem("flash-cards", JSON.stringify(reactQuestions));
+location.reload();
 }

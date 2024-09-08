@@ -1,4 +1,4 @@
-let nodeJsRoutine = () => {
+globalRoutines.nodeJS = () => {
     let questionData = [
         {question: "What is the event loop in Node.js, and how does it work?", answer: "The event loop is a core component of Node.js that handles asynchronous operations. It works by continuously checking for and executing tasks from the event queue. When an asynchronous operation completes, its callback is added to the event queue. The event loop processes these tasks one at a time, allowing Node.js to handle many operations concurrently without blocking the execution."},
 

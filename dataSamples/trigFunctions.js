@@ -1,4 +1,4 @@
-let trigFunctionsRoutine = () => {
+globalRoutines.trigFunctions = () => {
     const trigFunctions = [
         {
             "question": "What is the sine function?",

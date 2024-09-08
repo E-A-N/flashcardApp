@@ -1,4 +1,4 @@
-let typeScriptRoutine = () => {
+globalRoutines.typeScript = () => {
     let questionData = [
         {question: "What are the key differences between TypeScript and JavaScript?", answer: "TypeScript is a superset of JavaScript that adds static typing, interfaces, and advanced features such as generics and enums. It provides compile-time type checking, which helps catch errors early and improves code quality and maintainability. JavaScript, on the other hand, is a dynamically typed language without these features."},
 

@@ -1,4 +1,4 @@
-let httpStatusCodeTypesRoutine = () => {
+globalRoutines.httpStatusCodeTypes = () => {
     const httpStatusTypes = [
         {
             "question": "What is the purpose of HTTP status code 1xx type?",

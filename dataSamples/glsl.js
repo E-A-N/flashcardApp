@@ -1,4 +1,4 @@
-let glslRoutine = () => {
+globalRoutines.glsl = () => {
     let glslQuestions = [
         {question: "What is GLSL and what is it used for?", answer: "GLSL (OpenGL Shading Language) is a high-level shading language used for programming shaders in OpenGL. It allows developers to write code that executes on the GPU to control the rendering pipeline, including vertex and fragment shaders for processing vertices and pixels respectively."},
 

@@ -1,4 +1,4 @@
-let httpStatusesRoutine = () => {
+globalRoutines.httpStatusCodeTypes = () => {
     const httpStatuses = [
         { "question": "What is HTTP status 100?", "answer": "Indicates that the client should continue the request or ignore the response if the request is already finished." },
         { "question": "What is HTTP status 101?", "answer": "Sent in response to an Upgrade request header and indicates the protocol the server is switching to." },

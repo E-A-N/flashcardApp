@@ -1,4 +1,4 @@
-let httpHeadersTypeRoutine = () => {    
+globalRoutines.httpHeaderTypes = () => {    
     let quizArray = [
         {
             question: "What are Request headers in HTTP?",

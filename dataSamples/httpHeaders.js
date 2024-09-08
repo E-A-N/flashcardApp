@@ -1,4 +1,4 @@
-let httpHeadersRoutine = () => {
+globalRoutines.nodeJS = () => {
   let qaData = [
       {question: "What is a WWW-Authenticate header?", answer: "Defines the authentication method that should be used to access a resource."},
       {question: "What is an Authorization header?", answer: "Contains the credentials to authenticate a user-agent with a server."},
