@@ -284,12 +284,11 @@
 
         const topicSelectElm = document.getElementById("topic-select");
         topicSelectElm.options.selectedIndex = localStorage.getItem("saved-index")
-            || topicSelectElm.options.selectedIndex;
+            || topicSelectElm.options.selectedIndex
+            || 0;
         topicSelectElm.onchange = async () => {
             let index = topicSelectElm.options.selectedIndex;
-            localStorage.setItem('saved-index', topicSelectElm.options.selectedIndex);
             let item = topicSelectElm.options.item(index).value;
-            console.log('eandebug full URL is:', topicSelectElm.options.selectedIndex, item);
             globalRoutines[item]();
         }
         // const cardInputs = document.getElementById("flashcardForm");
