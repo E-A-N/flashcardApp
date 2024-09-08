@@ -99,6 +99,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="dataSamples/etags.js"></script>
+    <script src="dataSamples/gameMath.js"></script>
+
     <script>
         // Array to store flashcards
         let flashcards = JSON.parse(localStorage.getItem("flash-cards")) || [];
@@ -261,6 +264,7 @@
 
             try  {
                 const module = await import(fileUrl);
+                console.log("eandebug module is;", module);
                 module.routine();
                 location.reload();
             }

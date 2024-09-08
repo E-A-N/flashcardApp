@@ -1,4 +1,4 @@
-export function routine() {
+let gameeMathRoutine = () => {
     let gameMathQuestions = [
         {question: "What is the difference between Cartesian and polar coordinates?", answer: "Cartesian coordinates use a grid system with x and y (or z) axes to define positions in a plane or space. Polar coordinates use a radius and angle to define positions relative to a central point. In games, Cartesian coordinates are often used for grid-based movements, while polar coordinates are used for radial and angular positioning."},
 
