@@ -1,4 +1,4 @@
-let gameeMathRoutine = () => {
+let gameMathRoutine = () => {
     let gameMathQuestions = [
         {question: "What is the difference between Cartesian and polar coordinates?", answer: "Cartesian coordinates use a grid system with x and y (or z) axes to define positions in a plane or space. Polar coordinates use a radius and angle to define positions relative to a central point. In games, Cartesian coordinates are often used for grid-based movements, while polar coordinates are used for radial and angular positioning."},
 
@@ -92,6 +92,6 @@ let gameeMathRoutine = () => {
 
         {question: "How do you perform an axis-angle rotation in 3D graphics?", answer: "Axis-angle rotation involves rotating an object around a specified axis by a given angle. The rotation is represented by a rotation matrix or quaternion. For a matrix, use: `R = I + sin(angle) * K + (1 - cos(angle)) * K^2`, where `K` is the skew-symmetric matrix of the axis, and `I` is the identity matrix."}
     ];
-
     localStorage.setItem("flash-cards", JSON.stringify(gameMathQuestions));
+    location.reload();
 }

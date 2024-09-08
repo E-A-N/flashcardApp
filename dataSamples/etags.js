@@ -16,5 +16,5 @@ let etagsRoutine = () => {
         {question: "What are some best practices for using ETags to ensure efficient caching and reduce unnecessary network traffic?", answer: "Best practices for using ETags include: 1) Ensure that ETags accurately represent the state of the resource by updating them with every change. 2) Use strong ETags when exact content matching is required. 3) Implement proper cache headers like `Cache-Control` and `Expires` in conjunction with ETags to control caching behavior. 4) Handle cases where ETags may become stale or incorrect due to high concurrency by ensuring consistency in ETag generation. 5) Regularly monitor and test the caching behavior to optimize performance and reduce unnecessary network traffic."}
     ];
     localStorage.setItem("flash-cards", JSON.stringify(etagQuestions));
-
+    location.reload();
 }
