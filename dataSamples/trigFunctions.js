@@ -42,5 +42,7 @@ globalRoutines.trigFunctions = () => {
         }
     ];
     localStorage.setItem("flash-cards", JSON.stringify(trigFunctions));
-    location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

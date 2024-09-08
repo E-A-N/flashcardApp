@@ -74,5 +74,7 @@ globalRoutines.glsl = () => {
     ];
 
     localStorage.setItem("flash-cards", JSON.stringify(glslQuestions));
-    location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

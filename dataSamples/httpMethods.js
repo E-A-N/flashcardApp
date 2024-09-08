@@ -76,5 +76,7 @@ globalRoutines.httpMethods = () => {
         {question: "What is an example of a MERGE HTTP Method?", answer: "Combining multiple versions of a document."}
     ];
     localStorage.setItem("flash-cards", JSON.stringify(httpMethodList));
-    location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

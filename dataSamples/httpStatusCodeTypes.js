@@ -22,6 +22,8 @@ globalRoutines.httpStatusCodeTypes = () => {
         }
     ];
 
-localStorage.setItem("flash-cards", JSON.stringify(httpStatusTypes));
-location.reload();
+    localStorage.setItem("flash-cards", JSON.stringify(httpStatusTypes));
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

@@ -66,5 +66,7 @@ globalRoutines.httpCodes = () => {
     ];
 
     localStorage.setItem("flash-cards", JSON.stringify(httpStatuses));
-    location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

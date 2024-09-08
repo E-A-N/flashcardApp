@@ -84,5 +84,7 @@ globalRoutines.reactJS = () => {
     ];
 
 localStorage.setItem("flash-cards", JSON.stringify(reactQuestions));
-location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

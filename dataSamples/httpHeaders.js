@@ -67,5 +67,7 @@ globalRoutines.httpHeaders = () => {
   ];
   
   localStorage.setItem("flash-cards", JSON.stringify(qaData));
-  location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

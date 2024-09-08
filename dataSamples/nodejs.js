@@ -47,5 +47,7 @@ globalRoutines.nodeJS = () => {
         {question: "How do you handle graceful shutdowns in a Node.js application?", answer: "Graceful shutdowns can be handled by listening to termination signals (e.g., SIGTERM) and performing cleanup tasks before exiting. This includes closing database connections, stopping servers, and completing in-progress requests. Libraries like `graceful-shutdown` can help manage this process more smoothly."}
     ];
     localStorage.setItem("flash-cards", JSON.stringify(questionData));
-    location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

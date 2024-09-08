@@ -31,5 +31,7 @@ globalRoutines.httpHeaderTypes = () => {
     ];
 
     localStorage.setItem("flash-cards", JSON.stringify(quizArray));
-    location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

@@ -190,6 +190,7 @@
 
         // Function to start the test mode
         const startTest = () => {
+            flashcards = JSON.parse(localStorage.getItem("flash-cards")) || flashcards;
             if (flashcards.length === 0) {
                 alert('No flashcards available to test.');
                 return;

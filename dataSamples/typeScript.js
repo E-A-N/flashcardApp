@@ -47,5 +47,7 @@ globalRoutines.typeScript = () => {
         {question: "Explain how TypeScript’s 'ambient declarations' work and when to use them.", answer: "Ambient declarations allow you to define types or values that exist outside the TypeScript project, such as in external libraries or global variables. They are declared using the `declare` keyword, e.g., `declare const MY_GLOBAL: string;`. They are useful for integrating with existing JavaScript code or libraries that do not have TypeScript definitions."}
     ];
     localStorage.setItem("flash-cards", JSON.stringify(questionData));
-    location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }

@@ -93,5 +93,7 @@ globalRoutines.gameMath = () => {
         {question: "How do you perform an axis-angle rotation in 3D graphics?", answer: "Axis-angle rotation involves rotating an object around a specified axis by a given angle. The rotation is represented by a rotation matrix or quaternion. For a matrix, use: `R = I + sin(angle) * K + (1 - cos(angle)) * K^2`, where `K` is the skew-symmetric matrix of the axis, and `I` is the identity matrix."}
     ];
     localStorage.setItem("flash-cards", JSON.stringify(gameMathQuestions));
-    location.reload();
+    if (typeof startTest === "function"){
+        startTest();
+    }
 }
