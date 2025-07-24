@@ -1,5 +1,5 @@
 globalRoutines.lua1 = () => {
-    let questions = [
+    let questionData = [
     {
         question: "How do you declare a variable in Lua?",
         answer: "Use `=` to assign a value, like `x = 10`"
