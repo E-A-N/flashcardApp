@@ -304,6 +304,7 @@
             || topicSelectElm.options.selectedIndex
             || 0;
         topicSelectElm.onchange = async () => {
+            console.log("on change?");
             let index = topicSelectElm.options.selectedIndex;
             let item = topicSelectElm.options.item(index).value;
             globalRoutines[item]();
