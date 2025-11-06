@@ -2,6 +2,26 @@ globalRoutines.systemDesignAndDatabases = () => {
     let quizArray = [
         // System Design
         {
+            question: "What is database network partition?",
+            answer: "A network partition in a database refers to an event where the communication links between nodes in a distributed system are disrupted, causing the system to split into separate groups (partitions) that cannot communicate with each other. This impacts how the database manages data consistency and availability, as different partitions may not be able to share or synchronize updates until connectivity is restored."
+        },
+        {
+            question: "What is high availability?",
+            answer: "High availability in a database means the system is designed to remain operational and accessible without interruption, even when parts of the system fail. It achieves this through redundancy, failover, and fault-tolerant architectures that minimize downtime and ensure continuous service."
+        },
+        {
+            question: "Provide an example of data normalizaiton",
+            answer: "An example of data normalization is transforming a table that stores multiple products in one field per order into a structure where each product is stored in its own row with an order ID."
+        },
+        {
+            question: "What is partition tolerance?",
+            answer: "Partition tolerance is the ability of a distributed system to continue operating correctly even when there are communication breakdowns or network partitions between nodes, ensuring the system remains functional despite parts of the network being isolated. It involves handling message loss or delays during partitions and often requires trade-offs with consistency or availability to maintain operation."
+        },
+        {
+            quesiton: "What is eventual consistency?",
+            answer: "Eventual consistency means that in a distributed database, updates to data will propagate asynchronously and all replicas will converge to the same value over time if no new updates occur. This model sacrifices immediate consistency to ensure high availability and partition tolerance."
+        },
+        {
             question: "What is microservices architecture and what are its advantages?",
             answer: "Microservices architecture is an approach where a large application is composed of small, loosely coupled services. Advantages include improved scalability, easier deployment, better fault isolation, and the ability to use different technologies for different services."
         },
