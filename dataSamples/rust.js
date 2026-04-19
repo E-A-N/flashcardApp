@@ -1,4 +1,4 @@
-globalRoutines.rustQuiz = () => {
+globalRoutines.rust = () => {
     let quizArray = [
         {
             question: "What is ownership in Rust?",
