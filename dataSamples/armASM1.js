@@ -122,7 +122,7 @@ globalRoutines.armASM1 = () => {
         }
     ];
 
-    localStorage.setItem("flash-cards-arm", JSON.stringify(quizArray));
+    localStorage.setItem("flash-cards", JSON.stringify(quizArray));
     if (typeof startTest === "function"){
         startTest();
     }
